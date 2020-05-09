@@ -1,20 +1,45 @@
 # -*- coding: utf-8 -*-
+""" Create and solve tower of hanoi using stacks for towers """
 from typing import TypeVar, Generic, List
 T = TypeVar('T')
 
 class Stack(Generic[T]):
-
+    """ Simple, typed stack class """
     def __init__(self) -> None:
         self._container: List[T] = []
 
     def push(self, item: T) -> None:
+        """
+        Push item on stack
+
+        Parameters
+        ----------
+        item : T
+            item to push.
+
+        Returns
+        -------
+        None
+            The stack is changed in place - nothing to return.
+
+        """
         self._container.append(item)
 
     def pop(self) -> T:
+        """
+        pop first item from top of stack
+
+        Returns
+        -------
+        T
+            item on top of stack
+
+        """
         return self._container.pop()
 
     def __repr__(self) -> str:
         return repr(self._container)
+
 
 def hanoi(begin: Stack[int],
           end: Stack[int],
