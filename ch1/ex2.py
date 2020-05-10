@@ -7,8 +7,6 @@ You saw how the simple int type can be used to represent a bit string.
   sequence of bits.
 * Make it iterable
 * ..and implement __getitem__.
-* Write a wrapper around int that can be used generically as a sequence of
-  bits.
 * Reimplement CompressedGene using the wrapper
 
 Ideas
@@ -39,8 +37,8 @@ class BitSeq():
         self.size: int = size
         self.val: int = val
         self.bitlen: int = int.bit_length(val)
-        self.entries = math.ceil(self.bitlen / self.size)
-        self.pos = 0
+        self.entries: int = math.ceil(self.bitlen / self.size)
+        self.pos: int = 0
 
     def __getitem__(self, i) -> int:
         """ Allow indexing """
@@ -53,7 +51,7 @@ class BitSeq():
         """ build an iterator """
         return self
 
-    def __next__(self):
+    def __next__(self) -> int:
         if self.pos < self.entries:
             self.pos += 1
             val = self.__getitem__(self.pos - 1)
@@ -65,7 +63,7 @@ class BitSeq():
         return str(self.val)
 
 if __name__ == '__main__':
-    seq: BitSeq = BitSeq(size=4, val=0x1f0f0)
+    seq: BitSeq = BitSeq(size=4, val=0x12345)
 
     for pos, val in enumerate(seq):
         print(pos, val)

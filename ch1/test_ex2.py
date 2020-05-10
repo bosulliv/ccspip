@@ -40,3 +40,14 @@ class TestBitSeq(TestCase):
         ans = [2, 1, 10, 15, 1]
         res = [bits for bits in seq]
         self.assertListEqual(ans, res)
+
+    def test_leading_zeros(self):
+        """ Hmmm - this has opened can of worms.
+        I need a sentinel bit to allow leading
+        zeros, which are are an allowed encoding """
+        val: int = 0x1fa12
+        size: int = 4
+        seq: BitSeq = BitSeq(size=size, val=val)
+        ans = [2, 1, 10, 15, 1]
+        res = [bits for bits in seq]
+        self.assertListEqual(ans, res)
